@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Портфолио</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="x-ua-compatible" content="IE=edge">
+		<link href='../static/css/bootstrap.min.css?v=1' rel='stylesheet' type='text/css'>
+		<!--link href='../static/css/display.css?v=2' rel='stylesheet' type='text/css'-->
+		<!--link href='../static/css/content.css?v=8' rel='stylesheet' type='text/css'-->
+		<!--link href='../static/css/icons.css?v=1' rel='stylesheet' type='text/css'-->
+		<!--link href='../static/css/media.css?v=1' rel='stylesheet' type='text/css'-->
+		<!--link href="../static/css/jquery.fancybox.css?v=1" rel="stylesheet" type="text/css"-->
+	</head>
+	<body>
+		{% with messages=get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+					<script type="text/javascript">
+						alert("{{ message }}");
+					</script>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		<!--Экран-->
+		<div class="container-fluid all-display" id="all-display">
+			<!--Шапка-->
+			<div class="container" id="content-header">
+				<div class="container content-header">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row header-text">
+								<div class="col-sm-6">
+									<!--Побуждение,-слоган...-->
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<!-- Button trigger modal -->
+									<button type="button" class="btn btn-primary call-sms-btn" data-toggle="modal" data-target="#exampleModal">
+										Заказать звонок
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<form class="form header-form" id="frmMail" method="POST" action="">
+								{# form.csrf_token #}
+								<div class="form-group">
+									{# form.phone.label(class_="noselect") #}
+									{# form.phone(class_="form-control") #}
+								</div>
+								<div class="form-group">
+									{# form.email.label(class_="noselect") #}
+									{# form.email(class_="form-control") #}
+								</div>
+								<div class="form-group">
+									{# form.desc.label(class_="noselect") #}
+									{# form.desc(class_="form-control",rows=3) #}
+								</div>
+								{# form.submit(class_="btn btn-primary") #}
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../static/js/jquery-3.6.0.min.js?v=1" type="text/javascript"></script>
+		<script src="../static/js/bootstrap.min.js?v=1" type="text/javascript"></script>
+		<!--script src="../static/js/jquery.fancybox.min.js?v=1" type="text/javascript"></script-->
+		<!--script src="../static/js/galary.js?v=1" type="text/javascript"></script-->
+	</body>
+</html>
