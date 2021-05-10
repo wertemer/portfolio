@@ -13,7 +13,7 @@ project_root = os.path.dirname(__file__)
 template_path = os.path.join(project_root, './templates')
 app=Flask(__name__,template_folder=template_path)
 app.config.from_object(Configuration)
-db=SQLAlchemy
+db=SQLAlchemy(app)
 
 #Нужно для использования уже существующие БД:
 Base = declarative_base()
