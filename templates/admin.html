@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="Администранивная панель">
+		<link rel="icon" href="../static/icons/favicon.ico">
+		<title>Администранивная панель</title>
+		<!-- Bootstrap core CSS -->
+		<link href='../static/css/bootstrap.min.css?v=1' rel='stylesheet' type='text/css'>
+		<link href='../static/css/content.css?v=2' rel='stylesheet' type='text/css'>
+		<link href='../static/css/admin.css?v=2' rel='stylesheet' type='text/css'>
+		<link href='../static/css/icons.css?v=1' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#about-panel">Обо мне</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#portfolio-panel">Портфолио</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#contacts-panel">Контакты</a>
+				</li>
+				<li class="nav-item"><p>Пользователь: {{ ses['username'] }}</p></li>
+				<li class="nav-item">
+					<form id="frmLogOut" method="POST" action="/logout">
+						<input type="submit" class="btn btn-primary form-control" value="Выйти">
+					</form>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div id="about-panel" class="tab-pane active">
+					<h3>Обо мне</h3>
+					<div class="ShowAbout" id="ShowAbout">
+						<p>
+						{% if info!=None %}
+							{% autoescape false %}
+								{{ info.about }}
+								<br>
+								{{ info.public }}
+							{% endautoescape %}
+						{% endif %}
+						</p>
+						<button type="button" class="btn btn-primary" id="btnAboutEdit">Редактировать</button>
+					</div>
+					<div id="EditAbout" class="EditAbout">
+						<form id="frmEditAbout" method="POST" action="{{ url_for('admin') }}">
+							{{ frm_a.csrf_token }}
+							{{ frm_a.hidden_tag() }}
+							<div>
+								<input type="button" value="Просмотр"
+									class="btn-edit btn btn-primary btn-lg form-control" id="btnShowAbout">
+								<input type="button" value="Отменить"
+									class="btn-edit btn btn-primary btn-lg form-control" id="btnCancelAbout">
+								{{ frm_a.submit(class_="btn-edit btn btn-primary btn-lg form-control") }}
+							</div><br>
+							{{ frm_a.dtime.label }}&nbsp;
+							{% if info!=None %}
+								{{ frm_a.dtime(class_="form-control",type="datetime",value=""+info.public.strftime("%Y-%m-%d %H:%M:%S")+"") }}<br>
+							{% else %}
+								{{ frm_a.dtime(class_="form-control",type="datetime",value="") }}<br>
+							{% endif %}
+							{% if frm_a.dtime.errors %}
+								<ul style="color: red;">
+									{% for error in frm_a.dtime.errors %}
+										<li>{{ error }}</li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+							{# frm_a.text(class_="form-control",rows="12") #}
+							<textarea rows="12" name="text" class="form-control">
+								{% if info!=None %}
+									{{ info.about }}
+								{% endif %}
+							</textarea>
+							{% if frm_a.text.errors %}
+								<ul style="color: red;">
+									{% for error in frm_a.text.errors %}
+										<li>{{ error }}</li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						</form>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.container -->
+		<script src="../static/js/jquery-3.6.0.min.js?v=1" type="text/javascript"></script>
+		<script src="../static/js/bootstrap.min.js?v=1" type="text/javascript"></script>
+		<script src="../static/js/script.js?v=1" type="text/javascript"></script>
+	</body>
+</html>

@@ -1,0 +1,85 @@
+//Для кнопок изменить Контакт
+/*edc=document.getElementsByClassName('edc');
+for(i=0;i<edc.length;i++){
+	edc[i].onclick=function(){
+		eblock=document.getElementById('ListContact');
+		eblock.style.display="none";
+		sblock=document.getElementById('EditContact');
+		sblock.style.display="block";
+		con=this.value;
+		$.ajax({
+			type:'POST',
+			async:false,
+			url:'/info_contact',
+			dataType:'json',
+			data:{
+				'cid':con
+			},
+			timeout:3000,
+			error:function(xhr,status,error){
+				//console.log(xhr);
+				//console.log(status);
+				//console.log(error);
+			},
+			success:function(result){
+				eCon=document.getElementById('eContact');
+				eCon.value=result[0];
+				eId=document.getElementById('edId');
+				eId.value=con;
+				eicons=document.getElementsByName('eicons');
+				icons=result[1];
+				for(j=0;j<eicons.length;j++){
+					for(k=0;k<icons.length;k++){
+						if(eicons[j].value==icons[k]){
+							eicons[j].checked=true;
+						}
+					}
+				}
+			}
+		});
+	}
+}*/
+document.getElementById('btnAboutEdit').onclick=function(){
+	eblock=document.getElementById('EditAbout');
+	eblock.style.display = "block";
+	sblock=document.getElementById('ShowAbout');
+	sblock.style.display = "none";
+}
+document.getElementById('btnCancelAbout').onclick=function(){
+	eblock=document.getElementById('EditAbout');
+	eblock.style.display = "none";
+	sblock=document.getElementById('ShowAbout');
+	sblock.style.display = "block";
+}
+document.getElementById('btnShowAbout').onclick=function(){
+	eblock=document.getElementById('EditAbout');
+	eblock.style.display = "none";
+	sblock=document.getElementById('ShowAbout');
+	sblock.style.display = "block";
+}
+/*document.getElementById('btnAddCont').onclick=function(){
+	eblock=document.getElementById('ListContact');
+	eblock.style.display="none";
+	sblock=document.getElementById('AddContact');
+	sblock.style.display="block";
+}
+document.getElementById('btnAddContCancel').onclick=function(){
+	eblock=document.getElementById('ListContact');
+	eblock.style.display="block";
+	sblock=document.getElementById('AddContact');
+	sblock.style.display="none";
+}
+document.getElementById('btnEditContCancel').onclick=function(){
+	eblock=document.getElementById('ListContact');
+	eblock.style.display="block";
+	sblock=document.getElementById('EditContact');
+	sblock.style.display="none";
+	eCon=document.getElementById('eContact');
+	eCon.value='';
+	eId=document.getElementById('edId');
+	eId.value='';
+	eicons=document.getElementsByName('eicons');
+	for(j=0;j<eicons.length;j++){
+		eicons[j].checked=false;
+	}
+}*/

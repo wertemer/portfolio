@@ -3,7 +3,7 @@ import os
 class Configuration():
 	APPLICATION_DIR=os.path.dirname(os.path.realpath(__file__))
 	TEMPLATES_AUTO_RELOADED=True
-	SECRET_KEY=''
+	SECRET_KEY='adfhsajgfiywqryq03ur2093uq09fpoa]gojw9ur98q23y4r7tyfgshvbfakhaufhiuagrfiaeh5iuh'
 	DEBUG=True
 	SQLALCHEMY_DATABASE_URI="mysql+pymysql://root:gothic1321@localhost/mysite"
 

@@ -1,0 +1,81 @@
+/* Экстрамалые девайсы («телефоны», < 576px)*/
+@media (min-width: 280.98px) {
+	.scrollup{
+		display: none;
+	}
+}
+/* Экстрамалые девайсы («телефоны», < 576px)*/
+@media (min-width: 575.98px) {
+	.header-form{
+		margin-right: 10px;
+		height: 300px;
+	}
+	.call-sms-btn{
+		margin:0px 10px;
+	}
+	.header-text{
+		margin:0px 10px;
+	}
+	.scrollup{
+		display: none;
+	}
+}
+/* Малые девайсы («ландшафтные», < 768px)*/
+@media (min-width: 767.98px) {
+	.header-form{
+		margin:10px;
+		height: 310px;
+	}
+	.call-sms-btn{
+		margin:30px 50px;
+	}
+	.header-text{
+		margin:30px 50px;
+	}
+	.modal-dialog{
+		width:auto;
+	}
+	.scrollup{
+		display: none;
+	}
+}
+/* Средние девайсы («таблетки», < 992px) */
+@media (min-width: 991.98px) {
+	.header-form{
+		margin:10px;
+		height: 310px;
+	}
+	.call-sms-btn{
+		margin:50px 100px;
+	}
+	.header-text{
+		margin:50px 100px;
+	}
+}
+
+/* Большие девайсы (большие десктопы, < 1200px)*/
+@media (min-width: 1199px) {
+	.header-form{
+		margin:10px;
+		height: 310px;
+	}
+	.call-sms-btn{
+		margin:50px 150px;
+	}
+	.header-text{
+		margin:50px 150px;
+	}
+}
+/* Большие девайсы (большие десктопы, < 1200px)*/
+@media (min-width: 2000px) {
+	.header-form{
+		margin:10px;
+		height: 310px;
+	}
+	.call-sms-btn{
+		margin:50px 150px;
+	}
+	.header-text{
+		margin:50px 150px;
+	}
+}

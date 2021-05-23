@@ -1,0 +1,89 @@
+/*Верстка страницы*/
+.all-display{
+	background-color: #eeeeee;
+	min-height:600px;
+	height: 100%;
+}
+.carousel-inner img{
+	height: 400px;
+}
+.container{
+	min-width: 300px;
+}
+.content-header{
+	position: relative;
+	background-color:#159;
+	background-image: url(../images/slides/slide2.jpg);
+	color:#ffffff;
+	height:400px;
+	line-height: 0.4;
+}
+.content-menu{
+	background-color: #eeeeee;
+}
+.header-soder{
+  	/*position: relative;*/
+  	bottom:400px;
+  	z-index:999;
+  	height:350px;
+}
+.header-text{
+	/*position: relative;*/
+	min-width: 270px;
+	height:30px;
+	color:#ffffff;
+	float:left;
+}
+.header-form{
+	width:270px;
+	float:right;
+	background-color: #ff0000;
+	color:#ffffff;
+	padding:10px;
+	opacity: 0.75;
+	height:auto;
+}
+.content-about{
+	background-color: #ffffff;
+	color:#000000;
+	min-width: 260px;
+}
+.content-uslugi{
+	padding:15px;
+	background-color: #343a40;
+	color:#ffffff;
+	min-width: 260px;
+}
+.content-portfolio{
+	background-color: #ffffff;
+	color:#000000;
+	min-width: 260px;
+}
+.content-contacts{
+	background-color: #343a40;
+	color:#ffffff;
+	min-width: 260px;
+}
+.content-menu{
+	background-color: #343a40;
+}
+.navbar{
+	background-color: #343a40;
+	max-width:100%;
+	margin-bottom: 0px;
+	border-radius:0px;
+	border-color:#343a40;
+}
+.nav-link{
+	color:#fff;
+}
+.nav-link:hover{
+	color:#007bff;
+}
+.uslugi-block{
+	margin:0 auto;
+	display: table;
+}
+textarea{
+	resize:none;
+}

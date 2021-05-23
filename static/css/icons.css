@@ -1,0 +1,104 @@
+.contact-icon{
+    width:30px;
+    height:30px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+.usluga-img{
+    width: 200px;
+    height: 200px;
+    border:1px solid #ddd;
+    box-shadow: 0 2px 5px #aaa;
+    margin: 5% auto;
+    top: 0; left: 0; bottom: 0; right: 0;
+    transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+.circle{
+	width: 200px;
+	height: 200px;
+	border:1px solid #ddd;
+	border-radius: 50%;
+	box-shadow: 0 2px 5px #aaa;
+	margin: 5% auto;
+	top: 0; left: 0; bottom: 0; right: 0;
+	transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+}
+
+.circle:hover {
+	border-radius: 3px;
+}
+
+.gallery:after {
+    content: '';
+    display: block;
+    height: 2px;
+    margin: .5em 0 1.4em;
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(77,77,77,1) 50%, rgba(0, 0, 0, 0) 100%);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(77,77,77,1) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+.gallery img {
+    height: 100%;
+    pointer-events: none;
+}
+
+.gallery a {
+    width: 240px;
+    height: 180px;
+    display: inline-block;
+    overflow: hidden;
+    margin: 4px 6px;
+    box-shadow: 0 0 4px -1px #000;
+}
+div.scrollup {
+    position: fixed; /* фиксированная позиция */
+    color: #fff; /* цвет текста */
+    /*background-color: #286090; /* цвет заднего фона */
+    right: 5px; /* расстояние от правого края */
+    bottom: 0px; /* расстояние от нижнего края */
+    padding: 4px 10px; /* отступы до содержимого блока */
+    font-size: 20px; /* размер шрифта (иконки) */
+    border-top-left-radius: 4px; /* скругление верхнего левого угла */
+    border-top-right-radius: 4px; /* скругление верхнего правого угла */
+    cursor: pointer; /* форма курсора */
+    display: none; /* не отображать элемент */
+	text-align: center; /*выравнивание содержимого элемента по центру */
+}
+div.scrollup:hover {
+    /*background-color: #000; /* цвет заднего фона при наведении */
+}
+img.fancybox-image{
+    pointer-events: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.up-icon{
+    width:50px;
+    height:50px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+.img-title{
+    position:relative;
+    background-color :#dc3545;
+    width:200px;
+    height: 40px;
+    bottom:60px;
+    padding: 3px 10px;
+    opacity: 0.75;
+    text-align: center;
+}

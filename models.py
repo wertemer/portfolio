@@ -5,7 +5,7 @@ class tUsers(db.Model):
 	__tablename__='tUsers'
 	id=db.Column(db.Integer,primary_key=True)
 	login=db.Column(db.String(120),nullable=False)
-	password=db.Column(db.String(12),nullable=False)
+	password=db.Column(db.String(255),nullable=False)
 
 class tAbout(db.Model):
 	__tablename__='tAbout'
