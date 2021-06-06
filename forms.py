@@ -1,27 +1,30 @@
 from flask import Flask
 from flask_wtf import FlaskForm,RecaptchaField#,widgets
 from flask_wtf.file import FileAllowed, FileRequired
-from wtforms import StringField,SubmitField,TextAreaField,PasswordField,DateTimeField,FileField,SelectMultipleField,IntegerField
+from wtforms import StringField,SubmitField,TextAreaField,PasswordField,DateTimeField,FileField
+from wtforms import SelectMultipleField,IntegerField
 from wtforms.validators import Required,DataRequired,Email,Length
 
-#from werkzeug.utils import secure_filename
+from werkzeug.utils import secure_filename
+from flask_uploads import UploadSet, IMAGES
 
-#from flask_uploads import UploadSet, IMAGES
 #Для чекбоксов
 from wtforms import widgets
 
-#images = UploadSet('images', IMAGES)
+images = UploadSet('images', IMAGES)
 
 #Форма отправки заказа
 class OrderMail(FlaskForm):
-	phone=StringField('Введите Ваш номер телефона*:',validators=[DataRequired()],render_kw={'Placeholder':'+X(XXX)XXX XX XX'})
+	phone=StringField('Введите Ваш номер телефона*:',validators=[DataRequired()],
+	render_kw={'Placeholder':'+X(XXX)XXX XX XX'})
 	email=StringField('Введите Ваш E-mail*:',validators=[Email()],render_kw={'Placeholder':'sample@sample.com'})
 	desc=TextAreaField('Краткое описание заказа*',validators=[DataRequired()])
 	submit=SubmitField('Заказать')
 
 #Форма отправки смс
 class SmsMail(FlaskForm):
-	phone=StringField('Введите Ваш номер телефона*:',validators=[DataRequired()],render_kw={'Placeholder':'+X(XXX)XXX XX XX'})
+	phone=StringField('Введите Ваш номер телефона*:',validators=[DataRequired()],
+	render_kw={'Placeholder':'+X(XXX)XXX XX XX'})
 	submit=SubmitField('Отправить')
 
 #Форма входа
@@ -38,10 +41,11 @@ class AboutForm(FlaskForm):
 	submit=SubmitField('Сохранить')
 
 #Форма для загрузки файла портфолио
-#class UplFileP(FlaskForm):
-#	fname=FileField('Выберите файл:',validators=[FileAllowed(images, 'Images only!')])
-#	fdesc=StringField('Описание:',validators=[DataRequired()],render_kw={'Placeholder':'Введите описание файла портфолио'})
-#	submit=SubmitField('Загрузить')
+class UplFileP(FlaskForm):
+	fname=FileField('Выберите файл:',validators=[FileAllowed(images, 'Images only!')])
+	fdesc=StringField('Описание:',validators=[DataRequired()],
+	render_kw={'Placeholder':'Введите описание файла портфолио'})
+	submit=SubmitField('Загрузить')
 
 #Checkboxes
 class MultiCheckboxField(SelectMultipleField):
@@ -62,3 +66,9 @@ class EditContact(FlaskForm):
 	echoices=[]
 	eicons=MultiCheckboxField('Вид контакта:',choices=echoices,coerce=int)
 	esubmit=SubmitField('Сохранить')
+
+#форма добавление иконки
+class AddIcon(FlaskForm):
+	icon=FileField('Выберите файл:',validators=[FileAllowed(images, 'Images only!')])
+	idesc=StringField('Описание:',validators=[DataRequired()], render_kw={'Placeholder':'Введите описание иконки'})
+	submit=SubmitField('Добавить')

@@ -21,3 +21,4 @@ class Configuration():
 	MAIL_PASSWORD = 'yfnecz_1321'
 
 	UPLOAD_FOLDER='./static/images/portfolio/'
+	UPLOAD_ICON_CONTACT='./static/images/icons/contacts/'

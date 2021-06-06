@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<!--The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
 		<meta name="description" content="Администранивная панель">
 		<link rel="icon" href="../static/icons/favicon.ico">
 		<title>Администранивная панель</title>
@@ -21,10 +21,13 @@
 					<a class="nav-link active" data-toggle="tab" href="#about-panel">Обо мне</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#portfolio-panel">Портфолио</a>
+					<a class="nav-link" data-toggle="tab" href="#portfolio-panel">Портфолио</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#contacts-panel">Контакты</a>
+					<a class="nav-link"  data-toggle="tab" href="#contacts-panel">Контакты</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link"  data-toggle="tab" href="#icons-panel">Иконки</a>
 				</li>
 				<li class="nav-item"><p>Пользователь: {{ ses['username'] }}</p></li>
 				<li class="nav-item">
@@ -58,9 +61,12 @@
 								<input type="button" value="Отменить"
 									class="btn-edit btn btn-primary btn-lg form-control" id="btnCancelAbout">
 								{{ frm_a.submit(class_="btn-edit btn btn-primary btn-lg form-control") }}
+								<input type="button" value="Удалить"
+									class="btn-edit btn btn-primary btn-lg form-control" id="btnDeleteAbout">
 							</div><br>
 							{{ frm_a.dtime.label }}&nbsp;
 							{% if info!=None %}
+								<input type="hidden" id="about_id" name="about_id" value="{{ info.id }}">
 								{{ frm_a.dtime(class_="form-control",type="datetime",value=""+info.public.strftime("%Y-%m-%d %H:%M:%S")+"") }}<br>
 							{% else %}
 								{{ frm_a.dtime(class_="form-control",type="datetime",value="") }}<br>
@@ -87,6 +93,177 @@
 							{% endif %}
 						</form>
 					</div>
+				</div>
+				<div id="portfolio-panel" class="tab-pane fade">
+					<h3>Портфолио</h3>
+					<div class="ShowPortfolio" id="ShowPortfolio">
+						<div class="row">
+							<form id="frmUplP" method="POST" enctype="multipart/form-data"
+							action="{{ url_for('admin') }}"><!--enctype="multipart/form-data"-->
+								{{ frm_p.csrf_token }}
+								{{ frm_p.hidden_tag() }}
+								<div class="row">
+									<div class="col-md-2">
+										{{ frm_p.fname.label }}
+									</div>
+									<div class="col-md-10">
+										{{ frm_p.fname(class_="form-control") }}
+									</div>
+								</div>
+								&nbsp;
+								<div class="row">
+									<div class="col-md-2">
+										{{ frm_p.fdesc.label }}
+									</div>
+									<div class="col-md-10">
+										{{ frm_p.fdesc(class_="form-control") }}
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										{{ frm_p.submit(class_="btn-edit btn btn-primary form-control") }}
+									</div>
+								</div>
+							</form>
+						</div>
+						&nbsp;
+						<div class="row">
+							<div class="col">
+								<strong>Примеры:</strong>
+							</div>
+						</div>
+						{% for row in pimg %}
+							<div class="row">
+								<div class="col-md-2">
+									<img src="{{ row.photo }}" width="100" height="100" alt="{{ row.tdesc }}">
+								</div>
+								<div class="col-md-8">
+									<p>{{ row.desc }}"</p>
+								</div>
+								<div class="col-md-2">
+									<form action="/delimg" method="POST">
+										<input type="text" name="id" value="{{ row.id }}" hidden>
+										<input type="submit" class="btn btn-primary" value="Удалить">
+									</form>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div id="contacts-panel" class="tab-pane fade">
+					<h3>Контакты</h3>
+					<div class="ListContact" id="ListContact">
+						<div class="row">
+							<div class="col">
+								<button id="btnAddCont" class="btn btn-primary">Добавить контакт</button>
+							</div>
+						</div>
+						<div class="row">&nbsp;</div>
+						{% for c in icontact %}
+							<div class="row">
+								<div class="col-md-2">
+									{% for row in icons %}
+										{% if row.id==c[2] %}
+											<img src="{{ row.icon }}" class="contact-icon" title="{{ row.desc }}">&nbsp;
+										{% endif %}
+									{% endfor %}
+								</div>
+								<div class="col-md-6">
+									<strong class="noselect">{{ c[1] }}</strong>
+								</div>
+								<div class="col-md-2">
+									<button type="button" class="btn btn-primary edc" value="{{ c[0] }}" action="">
+										Изменить
+									</button>
+								</div>
+								<div class="col-md-2">
+									<form action="/delcontact" method="POST">
+										<input type="text" name="id" value="{{ c[0] }}" hidden>
+										<input type="submit" class="btn btn-primary" value="Удалить">
+									</form>
+								</div>
+							</div>
+							<div class="row">&nbsp;</div>
+						{% endfor %}
+					</div>
+					<div class="row AddContact" id="AddContact">
+						<form id="frmAddContact" method="POST" action="{{ url_for('admin') }}">
+							{{ frm_c.csrf_token }}
+							{{ frm_c.hidden_tag() }}
+							{{ frm_c.contact.label }}
+							{{ frm_c.contact(class_="form-control") }}
+							{{ frm_c.icons.label }}
+							{{ frm_c.icons }}
+							{{ frm_c.submit(class_="btn btn-primary",id="btnAddContact") }}&nbsp;
+							<button class="btn btn-primary" id="btnAddContCancel">Отмена</button>
+						</form>
+					</div>
+					<div class="row EditContact" id="EditContact">
+						<strong>Изменить контакт</strong>
+						<form id="frmEditContact" method="POST" action="{{ url_for('admin') }}">
+							{{ frm_b.csrf_token }}
+							{{ frm_b.hidden_tag() }}
+							{{ frm_b.eid(class_="HidenElement",id="edId") }}
+							{{ frm_b.econtact.label }}
+							{{ frm_b.econtact(class_="form-control",id="eContact") }}
+							{{ frm_b.eicons.label }}
+							{{ frm_b.eicons }}
+							{{ frm_b.esubmit(class_="btn btn-primary",id="btnEditContact") }}&nbsp;
+							<button class="btn btn-primary" id="btnEditContCancel">Отмена</button>
+						</form>
+					</div>
+				</div>
+				<div id="icons-panel" class="tab-pane fade">
+					<div class="row" id="addicon">
+						<form id="frmAddIcon" method="POST" enctype="multipart/form-data"
+						action="{{ url_for('admin') }}">
+							{{ frm_add_ico.csrf_token }}
+							{{ frm_add_ico.hidden_tag() }}
+							<div class="row">
+								<div class="col-md-12">
+									{{ frm_add_ico.icon.label }}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									{{ frm_add_ico.icon(class_="form-control",type="file",value="") }}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									{{ frm_add_ico.idesc.label }}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+
+
+									{{ frm_add_ico.idesc(class_="form-control",type="text",value="") }}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									{{ frm_add_ico.submit(class_="btn btn-primary") }}
+								</div>
+							</div>
+						</form>
+					</div>
+					{% for row in icons %}
+						<div class="row">
+							<div class="col-md-2">
+								<img src="{{ row.icon }}" width="100" height="100" alt="{{ row.desc }}">
+							</div>
+							<div class="col-md-8">
+								<p>{{ row.desc }}"</p>
+							</div>
+							<div class="col-md-2">
+								<form action="/delicon" method="POST">
+									<input type="text" name="id" value="{{ row.id }}" hidden>
+									<input type="submit" class="btn btn-primary" value="Удалить">
+								</form>
+							</div>
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div><!-- /.container -->

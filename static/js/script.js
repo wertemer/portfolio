@@ -1,5 +1,5 @@
 //Для кнопок изменить Контакт
-/*edc=document.getElementsByClassName('edc');
+edc=document.getElementsByClassName('edc');
 for(i=0;i<edc.length;i++){
 	edc[i].onclick=function(){
 		eblock=document.getElementById('ListContact');
@@ -17,28 +17,30 @@ for(i=0;i<edc.length;i++){
 			},
 			timeout:3000,
 			error:function(xhr,status,error){
-				//console.log(xhr);
-				//console.log(status);
-				//console.log(error);
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
 			},
 			success:function(result){
-				eCon=document.getElementById('eContact');
-				eCon.value=result[0];
-				eId=document.getElementById('edId');
-				eId.value=con;
-				eicons=document.getElementsByName('eicons');
-				icons=result[1];
-				for(j=0;j<eicons.length;j++){
-					for(k=0;k<icons.length;k++){
-						if(eicons[j].value==icons[k]){
-							eicons[j].checked=true;
+				if(result['status']!=0){
+					eId=document.getElementById('edId');
+					eId.value=result['id'];
+					eicons=document.getElementsByName('eicons');
+					for(j=0;j<eicons.length;j++){
+						for(k=0;k<result['icons'].length;k++){
+							if(eicons[j].value==result['icons'][k]){
+								eicons[j].checked=true;
+							}
 						}
 					}
+				} else {
+					alert(result['msg']);
 				}
+				console.log(result)
 			}
 		});
 	}
-}*/
+}
 document.getElementById('btnAboutEdit').onclick=function(){
 	eblock=document.getElementById('EditAbout');
 	eblock.style.display = "block";
@@ -57,29 +59,30 @@ document.getElementById('btnShowAbout').onclick=function(){
 	sblock=document.getElementById('ShowAbout');
 	sblock.style.display = "block";
 }
-/*document.getElementById('btnAddCont').onclick=function(){
-	eblock=document.getElementById('ListContact');
-	eblock.style.display="none";
-	sblock=document.getElementById('AddContact');
-	sblock.style.display="block";
-}
-document.getElementById('btnAddContCancel').onclick=function(){
-	eblock=document.getElementById('ListContact');
-	eblock.style.display="block";
-	sblock=document.getElementById('AddContact');
-	sblock.style.display="none";
-}
-document.getElementById('btnEditContCancel').onclick=function(){
-	eblock=document.getElementById('ListContact');
-	eblock.style.display="block";
-	sblock=document.getElementById('EditContact');
-	sblock.style.display="none";
-	eCon=document.getElementById('eContact');
-	eCon.value='';
-	eId=document.getElementById('edId');
-	eId.value='';
-	eicons=document.getElementsByName('eicons');
-	for(j=0;j<eicons.length;j++){
-		eicons[j].checked=false;
+$('#btnDeleteAbout').on('click',function(){
+	about_id=$('#frmEditAbout').find('#about_id').val();
+	if(about_id!=''||about_id!=None){
+		var res=$.ajax({
+			url:'/deleteAbout',
+			type:'POST',
+			data:{
+				'id':about_id
+			},
+			dataType:'JSON'
+		});
+		res.done(function(msg){
+			alert(msg.msg);
+		});
+		res.fail(function(jqXHR, textStatus){
+			//alert('error'+jqXHR+' '+textStatus);
+			console.log(jqXHR);
+			console.log(textStatus);
+		})
+	}else{
+		alert('Нет общей информации по данной дате!!');
 	}
-}*/
+});
+$('#btnAddCont').on('click',function(){
+	cblock=document.getElementById('AddContact');
+	cblock.style.display='block';
+});
