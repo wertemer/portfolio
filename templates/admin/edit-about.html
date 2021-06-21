@@ -1,0 +1,42 @@
+<div id="EditAbout" class="EditAbout">
+	<form id="frmEditAbout" method="POST" action="{{ url_for('admin') }}">
+		{{ frm_a.csrf_token }}
+		{{ frm_a.hidden_tag() }}
+		<div>
+			<input type="button" value="Просмотр"
+				class="btn-edit btn btn-primary btn-lg form-control" id="btnShowAbout">
+			<input type="button" value="Отменить"
+				class="btn-edit btn btn-primary btn-lg form-control" id="btnCancelAbout">
+			{{ frm_a.submit(class_="btn-edit btn btn-primary btn-lg form-control") }}
+			<input type="button" value="Удалить"
+				class="btn-edit btn btn-primary btn-lg form-control" id="btnDeleteAbout">
+		</div><br>
+		{{ frm_a.dtime.label }}&nbsp;
+		{% if info!=None %}
+			<input type="hidden" id="about_id" name="about_id" value="{{ info.id }}">
+			{{ frm_a.dtime(class_="form-control",type="datetime",value=""+info.public.strftime("%Y-%m-%d %H:%M:%S")+"") }}<br>
+		{% else %}
+			{{ frm_a.dtime(class_="form-control",type="datetime",value="") }}<br>
+		{% endif %}
+		{% if frm_a.dtime.errors %}
+			<ul style="color: red;">
+				{% for error in frm_a.dtime.errors %}
+					<li>{{ error }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+		{# frm_a.text(class_="form-control",rows="12") #}
+		<textarea rows="12" name="text" class="form-control">
+			{% if info!=None %}
+				{{ info.about }}
+			{% endif %}
+		</textarea>
+		{% if frm_a.text.errors %}
+			<ul style="color: red;">
+				{% for error in frm_a.text.errors %}
+					<li>{{ error }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</form>
+</div>

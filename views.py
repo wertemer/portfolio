@@ -1,7 +1,7 @@
 from app import app,engine,db
 from flask import render_template, redirect, flash, url_for, session,request
 from models import tUsers, tAbout, tPortfolio, tContacts, dIcons, tContactIcons
-from forms import LoginForm, AboutForm, AddContact, EditContact, UplFileP, AddIcon
+from forms import LoginForm, AboutForm, AddContact, EditContact, UplFileP, AddIcon, OrderMail
 #for agregation sql
 from sqlalchemy import func
 #for hashing passwords
@@ -74,17 +74,42 @@ def info_contact():
 	print(json_string)
 	return json_string
 
+#Удаляем контакт
+@app.route("/delcontact",methods=["POST"])
+def delcontact():
+	id=int(request.form['id'])
+	exist=tContacts.query.filter_by(id=id).one_or_none()
+	if exist!=None:
+		delconticons=tContactIcons.query.filter_by(f_contact=id).all()
+		db.session.delete(delconticons)
+		db.session.commit()
+		delcont=tContacts.query.filter_by(id=id).one()
+		db.session.delete(delcont)
+		db.session.commit()
+	else:
+		print('none')
+		flash('Контакт не найден!')
+	return redirect(url_for('admin'))
+
 #Страница сайта
 @app.route('/') #,methods=['GET','POST']
 def index():
+	form=OrderMail()
+	list_contacts=[]
 	max_id=db.session.query(tAbout,func.max(tAbout.public)).one()
 	about=tAbout.query.filter_by(public=max_id[1]).one_or_none()
 	photos=tPortfolio.query.all()
+	contacts=tContacts.query.all()
+	for contact in contacts:
+		icons=contact.getIcons()
+		list_contacts.append(icons)
 	if about!=None :
 		info=about.about
 	else:
 		info=''
-	return render_template('index.html',info=info,portfolio=photos)
+	if form.validate_on_submit():
+		pass
+	return render_template('index.html',info=info,portfolio=photos,contacts=list_contacts, form=form)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -127,11 +152,15 @@ def admin():
 	icons=dIcons.query.all()
 	typecontact=[]
 	acont=[]
+	aicon=[]
 	for ico in icons:
 		typecontact.append((ico.id, ico.desc))
 	for contact in contacts:
 		for i in contact.cico:
-			acont.append((contact.id,contact.contact,i.f_icon))
+			aicon.append(i.f_icon)
+		acont.append({'id':contact.id, 'contact':contact.contact, 'icons':aicon})
+		aicon=[]
+	print(acont)
 	addcontact.icons.choices=typecontact
 	editcontact.eicons.choices=typecontact
 	if 'username' in session:
@@ -235,7 +264,17 @@ def admin():
 					id=editcontact.eid.data
 					contact=editcontact.econtact.data
 					tcon=editcontact.eicons.data
-					print(id,contact,tcon)
+					edcontact=tContacts.query.get(id)
+					edcontact.contact=contact
+					db.session.add(edcontact)
+					db.session.commit()
+					tContactIcons.query.filter_by(f_contact=id).delete()
+					for ico in tcon:
+						contico=tContactIcons(f_contact=id, f_icon=ico)
+						db.session.add(contico)
+						db.session.commit()
+						contico=''
+					editcontact.econtact.data=''
 			return render_template(
 				'admin.html',
 				ses=session,

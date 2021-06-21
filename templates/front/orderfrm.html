@@ -1,0 +1,16 @@
+<form class="form" id="frmMail" method="POST" action="">
+	{{ form.csrf_token }}
+	<div class="form-group">
+		{{ form.phone.label(class_="noselect") }}
+		{{ form.phone(class_="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.email.label(class_="noselect") }}
+		{{ form.email(class_="form-control") }}
+	</div>
+	<div class="form-group">
+		{{ form.desc.label(class_="noselect") }}
+		{{ form.desc(class_="form-control",rows=2) }}
+	</div>
+	{{ form.submit(class_="btn btn-primary") }}
+</form>

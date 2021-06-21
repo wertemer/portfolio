@@ -1,0 +1,14 @@
+<div class="row EditContact" id="EditContact">
+	<strong>Изменить контакт</strong>
+	<form id="frmEditContact" method="POST" action="{{ url_for('admin') }}">
+		{{ frm_b.csrf_token }}
+		{{ frm_b.hidden_tag() }}
+		{{ frm_b.eid(class_="HidenElement",id="edId") }}
+		{{ frm_b.econtact.label }}
+		{{ frm_b.econtact(class_="form-control",id="eContact") }}
+		{{ frm_b.eicons.label }}
+		{{ frm_b.eicons }}
+		{{ frm_b.esubmit(class_="btn btn-primary",id="btnEditContact") }}&nbsp;
+		<button class="btn btn-primary" id="btnEditContCancel">Отмена</button>
+	</form>
+</div>

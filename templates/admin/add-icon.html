@@ -1,0 +1,30 @@
+<form id="frmAddIcon" method="POST" enctype="multipart/form-data"
+action="{{ url_for('admin') }}">
+	{{ frm_add_ico.csrf_token }}
+	{{ frm_add_ico.hidden_tag() }}
+	<div class="row">
+		<div class="col-md-12">
+			{{ frm_add_ico.icon.label }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			{{ frm_add_ico.icon(class_="form-control",type="file",value="") }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			{{ frm_add_ico.idesc.label }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			{{ frm_add_ico.idesc(class_="form-control",type="text",value="") }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			{{ frm_add_ico.submit(class_="btn btn-primary") }}
+		</div>
+	</div>
+</form>

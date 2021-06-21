@@ -25,6 +25,14 @@ class tContacts(db.Model):
 	contact=db.Column(db.String(255),nullable=True)
 	cico=db.relationship('tContactIcons',backref='tContacts',lazy='dynamic')
 
+	def getIcons(self):
+		icons=[]
+		tCI=tContactIcons.query.filter_by(f_contact=self.id).all()
+		for tci in tCI:
+			dicon=dIcons.query.filter_by(id=tci.f_icon).one()
+			icons.append({'id':tci.id, 'icon':dicon.icon, 'desc':dicon.desc,'contact':self.contact})
+		return icons
+
 class dIcons(db.Model):
 	__tablename__='dIcons'
 	id=db.Column(db.Integer,primary_key=True)

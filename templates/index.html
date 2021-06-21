@@ -36,29 +36,17 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<!-- Button trigger modal -->
-									<button type="button" class="btn btn-primary call-sms-btn" data-toggle="modal" data-target="#exampleModal">
+									<button type="button" class="btn btn-primary call-sms-btn" data-toggle="modal"
+										data-target="#FrontModal">
 										Заказать звонок
 									</button>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
-							<form class="form header-form" id="frmMail" method="POST" action="">
-								{# form.csrf_token #}
-								<div class="form-group">
-									{# form.phone.label(class_="noselect") #}
-									{# form.phone(class_="form-control") #}
-								</div>
-								<div class="form-group">
-									{# form.email.label(class_="noselect") #}
-									{# form.email(class_="form-control") #}
-								</div>
-								<div class="form-group">
-									{# form.desc.label(class_="noselect") #}
-									{# form.desc(class_="form-control",rows=3) #}
-								</div>
-								{# form.submit(class_="btn btn-primary") #}
-							</form>
+							<div class="header-form">
+								{% include './front/orderfrm.html' %}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -67,30 +55,12 @@
 			<div class="container" id="menu">
 				<!-- Content Menu here -->
 				<div class="container content-menu">
-					<nav class="navbar navbar-inverse"><div class="container-fluid">
-						<!-- Brand and toggle get grouped for better mobile display -->
-						<div class="navbar-header">
-							<!-- Collect the nav links, forms, and other content for toggling -->
-							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
-								<ul class="nav navbar-nav">
-									<li class="nav-item">
-										<a class="nav-link" href="#">Главная</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#about">Обо мне</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#uslugi">Услуги</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#portfolio">Портфолио</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#contacts">Контакты</a>
-									</li>
-								</ul>
-							</div><!-- /.navbar-collapse -->
-						</div><!-- /.container-fluid -->
+					<nav class="navbar navbar-expand-lg">
+						<div class="collapse navbar-collapse" id="navbarNav">
+							<ul class="navbar-nav">
+								{% include './front/menuitems.html' %}
+							</ul>
+						</div>
 					</nav>
 				</div>
 			</div>
@@ -120,15 +90,18 @@
 							<div class="uslugi-block">
 								<div class="row">
 									<div class="col-sm-4">
-										<img src="../static/images/icons/db_1.png" class="usluga-img" alt="Разработка Баз Данных"><br>
+										<img src="../static/images/icons/db_1.png" class="usluga-img"
+											alt="Разработка Баз Данных"><br>
 										<span ><h6 class="img-title noselect">Разработка Баз Данных</h6></span>
 									</div>
 									<div class="col-sm-4">
-										<img src="../static/images/icons/site.png" class="usluga-img" alt="Разаработка и соправождение сайтов"><br>
+										<img src="../static/images/icons/site.png" class="usluga-img"
+											alt="Разаработка и соправождение сайтов"><br>
 										<span><h6 class="img-title noselect">Разаработка сайтов</h6></span>
 									</div>
 									<div class="col-sm-4">
-										<img src="../static/images/icons/pc4.png" class="usluga-img" alt="Прикладное программирование"><br>
+										<img src="../static/images/icons/pc4.png" class="usluga-img"
+											alt="Прикладное программирование"><br>
 										<span><h6 class="img-title noselect">Прикладное программирование</h6></span>
 									</div>
 								</div>
@@ -166,29 +139,14 @@
 					<div class="row">
 						<div class="col-md-3">
 							<ul class="nav flex-column noselect">
-								<li class="nav-item active">
-									<a class="nav-link" href="#">Главная</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#about">Обо мне</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#uslugi">Услуги</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#portfolio">Портфолио</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#contacts">Контакты</a>
-								</li>
+								{% include './front/menuitems.html' %}
 							</ul>
 						</div>
 						<div class="col-md-6">
-							<h3 class="noselect">Контакты</h3>
-
+							{% include './front/contacts.html' %}
 						</div>
 						<div class="col-md-3">
-
+							{% include './front/orderfrm.html' %}
 						</div>
 					</div>
 					<div class="row">

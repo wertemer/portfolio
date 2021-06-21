@@ -1,0 +1,10 @@
+<h3 class="noselect">Контакты</h3>
+{% for contact in contacts %}
+	<br>
+	{% for c in contact %}
+		<img src="{{ c.icon }}" alt="{{ c.desc }}" title="{{ c.desc }}" class="contact-icon">
+		&nbsp;
+		<strong>{{ c.contact }}</strong>
+	{% endfor %}
+	<br>
+{% endfor %}

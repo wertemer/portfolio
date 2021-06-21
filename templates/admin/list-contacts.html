@@ -1,0 +1,40 @@
+<h3>Контакты</h3>
+<div class="ListContact" id="ListContact">
+	<div class="row">
+		<div class="col">
+			<button id="btnAddCont" data-toggle="modal" data-target="#AdminModal" class="btn btn-primary">
+				Добавить контакт
+			</button>
+		</div>
+	</div>
+	<div class="row">&nbsp;</div>
+	{% for c in icontact %}
+		<div class="row">
+			<div class="col-md-2">
+				{% for row in icons %}
+					{% for ic in c['icons'] %}
+						{% if row.id==ic %}
+							<img src="{{ row.icon }}" class="contact-icon" title="{{ row.desc }}">
+							&nbsp;
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			</div>
+			<div class="col-md-6">
+				<strong class="noselect">{{ c['contact'] }}</strong>
+			</div>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-primary edc" value="{{ c['id'] }}" action="">
+					Изменить
+				</button>
+			</div>
+			<div class="col-md-2">
+				<form action="/delcontact" method="POST">
+					<input type="text" name="id" value="{{ c['id'] }}" hidden>
+					<input type="submit" class="btn btn-primary" value="Удалить">
+				</form>
+			</div>
+		</div>
+		<div class="row">&nbsp;</div>
+	{% endfor %}
+</div>

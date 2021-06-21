@@ -1,0 +1,53 @@
+<div class="ShowPortfolio" id="ShowPortfolio">
+	<div class="row">
+		<form id="frmUplP" method="POST" enctype="multipart/form-data"
+		action="{{ url_for('admin') }}"><!--enctype="multipart/form-data"-->
+			{{ frm_p.csrf_token }}
+			{{ frm_p.hidden_tag() }}
+			<div class="row">
+				<div class="col-md-2">
+					{{ frm_p.fname.label }}
+				</div>
+				<div class="col-md-10">
+					{{ frm_p.fname(class_="form-control") }}
+				</div>
+			</div>
+			&nbsp;
+			<div class="row">
+				<div class="col-md-2">
+					{{ frm_p.fdesc.label }}
+				</div>
+				<div class="col-md-10">
+					{{ frm_p.fdesc(class_="form-control") }}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					{{ frm_p.submit(class_="btn-edit btn btn-primary form-control") }}
+				</div>
+			</div>
+		</form>
+	</div>
+	&nbsp;
+	<div class="row">
+		<div class="col">
+			<strong>Примеры:</strong>
+		</div>
+	</div>
+	{% for row in pimg %}
+		<div class="row">
+			<div class="col-md-2">
+				<img src="{{ row.photo }}" width="100" height="100" alt="{{ row.tdesc }}">
+			</div>
+			<div class="col-md-8">
+				<p>{{ row.desc }}"</p>
+			</div>
+			<div class="col-md-2">
+				<form action="/delimg" method="POST">
+					<input type="text" name="id" value="{{ row.id }}" hidden>
+					<input type="submit" class="btn btn-primary" value="Удалить">
+				</form>
+			</div>
+		</div>
+	{% endfor %}
+</div>

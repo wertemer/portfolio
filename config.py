@@ -3,7 +3,7 @@ import os
 class Configuration():
 	APPLICATION_DIR=os.path.dirname(os.path.realpath(__file__))
 	TEMPLATES_AUTO_RELOADED=True
-	SECRET_KEY='adfhsajgfiywqryq03ur2093uq09fpoa]gojw9ur98q23y4r7tyfgshvbfakhaufhiuagrfiaeh5iuh'
+	SECRET_KEY=''
 	DEBUG=True
 	SQLALCHEMY_DATABASE_URI="mysql+pymysql://root:gothic1321@localhost/mysite"
 
@@ -17,8 +17,8 @@ class Configuration():
 	MAIL_USE_TLS=True
 	MAIL_USE_SSL=False
 
-	MAIL_USERNAME = 'ssender097@gmail.com'
-	MAIL_PASSWORD = 'yfnecz_1321'
+	MAIL_USERNAME = ''
+	MAIL_PASSWORD = ''
 
 	UPLOAD_FOLDER='./static/images/portfolio/'
 	UPLOAD_ICON_CONTACT='./static/images/icons/contacts/'
