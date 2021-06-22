@@ -83,9 +83,8 @@ $('#btnDeleteAbout').on('click',function(){
 	}
 });
 $('#btnAddCont').on('click',function(){
-	cblock=document.getElementById('AddContact');
-	cblock.style.display='block';
 	$('#winType').val("1");
+	$('#AdminModalLabel').html('Новый контакт');
 });
 $('#AdminModal').on('shown.bs.modal', function (e) {
 	console.log('fasdfafd');
